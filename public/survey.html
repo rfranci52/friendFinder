@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>survey!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="text-center">
+                <span class="fa fa-handshake-o"></span>Friend Finder
+            </h1>
+            <hr>
+            <h2 class="text-center">Discover new friends
+
+            </h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">submit this survey to find a match</div>
+            </div>
+            <div class="card-body">
+                <form role="form">
+                    <div class="form-group">
+                        <label for="friend-name">Name</label>
+                        <input type="text" class="form-control" id="friend-name">
+                    </div>
+                    <div class="form-group">
+                        <label for="friend-photo">Image</label>
+                        <input type="text" class="form-control" id="friend-photo"></div>
+                    <div class="form-group">
+                        <label for="question1">On a scale of 0 to 5, how enjoyable is going to live events</label>
+                        <div>
+                            <input type="radio" name="1" id="Q1-0" value="0" checked><label for="zero-1">0</label>
+                            <input type="radio" name="1" id="Q1-1" value="1"><label for="1">1</label>
+                            <input type="radio" name="1" id="Q1-2" value="2"><label for="2">2</label>
+                            <input type="radio" name="1" id="Q1-3" value="3"><label for="3">3</label>
+                            <input type="radio" name="1" id="Q1-4" value="4"><label for="4">4</label>
+                            <input type="radio" name="1" id="Q1-5" value="5"><label for="5">5</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="question2">On a scale of 0 to 5, how enjoyable is going on a road trip</label>
+                        <div>
+                            <input type="radio" name="2" id="Q2-0" value="0" checked><label for="0">0</label>
+                            <input type="radio" name="2" id="Q2-1" value="1"><label for="1">1</label>
+                            <input type="radio" name="2" id="Q2-2" value="2"><label for="2">2</label>
+                            <input type="radio" name="2" id="Q2-3" value="3"><label for="3">3</label>
+                            <input type="radio" name="2" id="Q2-4" value="4"><label for="4">4</label>
+                            <input type="radio" name="2" id="Q2-5" value="5"><label for="5">5</label>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                    <div class="form-group">
+                        <label for="question3">On a scale of 0 to 5,how enjoyable is playing board games</label>
+                        <div>
+                            <input type="radio" name="3" id="Q3-0" value="5" checked><label for="0">0</label>
+                            <input type="radio" name="3" id="Q3-1" value="4"><label for="1">1</label>
+                            <input type="radio" name="3" id="Q3-2" value="3"><label for="2">2</label>
+                            <input type="radio" name="3" id="Q3-3" value="2"><label for="3">3</label>
+                            <input type="radio" name="3" id="Q3-4" value="1"><label for="4">4</label>
+                            <input type="radio" name="3" id="Q3-5" value="0"><label for="5">5</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="question4">On a scale of 0 to 5 how enjoyable is creating a game,</label>
+                        <div><input type="radio" name="4" id="Q4-0" value="5" checked><label for="0">0</label>
+                            <input type="radio" name="4" id="Q4-1" value="4"><label for="1">1</label>
+                            <input type="radio" name="4" id="Q4-2" value="3"><label for="2">2</label>
+                            <input type="radio" name="4" id="Q4-3" value="2"><label for="3">3</label>
+                            <input type="radio" name="4" id="Q4-4" value="1"><label for="4">4</label>
+                            <input type="radio" name="4" id="Q-5" value="0"><label for="5">5</label>
+                        </div>
+                        <button type="submit" class="btn btn-primary submit">Submit</button>
+
+                    </div>
+
+                </form>
+
+
+                <p> <a href="/results">View results</a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
+
+    </div>
+
+</body>
+
+
+
+</html>
+
+<script type="text/javascript">
+    $(".submit").on("click", function (event) {
+        event.preventDefault();
+
+
+        var newFriend = {
+            "friendName": $("#friend-name").val().trim(),
+            "photo": $("#friend-photo").val().trim(),
+            "scores[1]": $("input[name='1']:checked").val(),
+            "scores[2]": $("input[name='2']:checked").val(),
+            "scores[3]": $("input[name='3']:checked").val(),
+            "scores[4]": $("input[name='4']:checked").val()
+
+
+
+        };
+
+
+
+        $.post("/api/friends", newFriend,
+            function (data) {
+
+                if (data) {
+                    // alert("data added")
+                    // console.log(newFriend);
+                    // alert(newFriend);
+                    // module.exports = newFriend;
+
+
+                } else {
+                    alert("sorry")
+                }
+            })
+
+
+    })
+</script>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>results Page</title>
+
+    <!-- Latest compiled and minified CSS & JS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="jumbotron">
+            <h1 class="text-center"><span class="fa fa-fire"></span> your match</h1>
+            <hr>
+
+
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- Current Tables in Use -->
+                    <div class="card">
+
+                        <div class="card-body">
+                            <ul id="tableList" class="list-group"></ul>
+                        </div>
+                    </div>
+
+                    <!-- Waiting List Card -->
+
+                </div>
+            </div>
+
+
+            <footer class="footer mt-4">
+                <div class="container">
+                    <p>Control Panel</p>
+                    <p> <a href="/api/friends">friends list</a>
+                </div>
+            </footer>
+
+        </div>
+
+</body>
+
+
+<!-- BELOW CODE IS CRITICAL. IT HANDLES HOW FORM DATA IS LOADED FROM OUR SERVER -->
+<script type="text/javascript">
+    // In this code, jQuery is used to "download" the data from our server
+    // We then dynamically display this content in our table. This is very similar to the group projects you just completed.
+    // It's also very similar to the NYT search application. In fact, I copied a ton of code from there.
+
+    function runTableQuery() {
+        // The AJAX function uses the URL of our API to GET the data associated with it (initially set to localhost)
+        $.ajax({
+                url: "/api/friends",
+                method: "GET"
+            })
+            .then(function (friendData) {
+
+
+
+                friend1score0 = friendData[0].scores[0];
+                friend1score1 = friendData[0].scores[1];
+                friend1score2 = friendData[0].scores[2];
+                friend1score3 = friendData[0].scores[3];
+
+                friend2score0 = friendData[1].scores[0];
+                friend2score1 = friendData[1].scores[1];
+                friend2score2 = friendData[1].scores[2];
+                friend2score3 = friendData[1].scores[3];
+
+                friend3score0 = friendData[2].scores[0];
+                friend3score1 = friendData[2].scores[1];
+                friend3score2 = friendData[2].scores[2];
+                friend3score3 = friendData[2].scores[3];
+
+                friend4score0 = friendData[3].scores[0];
+                friend4score1 = friendData[3].scores[1];
+                friend4score2 = friendData[3].scores[2];
+                friend4score3 = friendData[3].scores[3];
+
+                friend5score0 = friendData[4].scores[0];
+                friend5score1 = friendData[4].scores[1];
+                friend5score2 = friendData[4].scores[2];
+                friend5score3 = friendData[4].scores[3];
+
+
+
+
+
+                friendscore1total = friend1score0 + friend1score1 + friend1score2 + friend1score3;
+                friendscore2total = friend2score0 + friend2score1 + friend2score2 + friend2score3;
+                friendscore3total = friend3score0 + friend3score1 + friend3score2 + friend3score3;
+                friendscore4total = friend4score0 + friend4score1 + friend4score2 + friend4score3;
+                friendscore5total = friend5score0 + friend5score1 + friend5score2 + friend5score3;
+
+
+                if (friendscore5total >= friendscore1total) {
+                    var tableList = $("#tableList");
+
+                    // Then display the fields in the HTML (Section Name, Date, URL)
+                    var listItem = $("<li class='list-group-item mt-4'>");
+
+                    listItem.append(
+                        $("<h2>").text("Table #" + (0)),
+                        $("<hr>"),
+                        $("<h2>").text("ID: " + friendData[0].friendName),
+                        $("<h2>").text("Name: " + friendData[0].photo),
+                        $("<h2>").text("Email: " + friendData[0].scores),
+                        // $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+                    );
+                    tableList.append(listItem);
+
+                } else if (friendscore5total >= friendscore2total) {
+                    var tableList = $("#tableList");
+
+                    // Then display the fields in the HTML (Section Name, Date, URL)
+                    var listItem = $("<li class='list-group-item mt-4'>");
+
+                    listItem.append(
+                        // $("<h2>").text("Table #" + (0)),
+                        $("<hr>"),
+                        $("<h2>").text("ID: " + friendData[1].friendName),
+                        $("<h2>").text("Name: " + friendData[1].photo),
+                        $("<h2>").text("Email: " + friendData[1].scores),
+                        // $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+                    );
+                    tableList.append(listItem);
+
+                } else if (friendscore5total >= friendscore3total) {
+                    var tableList = $("#tableList");
+
+                    // Then display the fields in the HTML (Section Name, Date, URL)
+                    var listItem = $("<li class='list-group-item mt-4'>");
+
+                    listItem.append(
+                        // $("<h2>").text("Table #" + (0)),
+                        $("<hr>"),
+                        $("<h2>").text("friend: " + friendData[2].friendName),
+                        $("<h2>").text("photo: " + friendData[2].photo),
+                        $("<h2>").text("survey answers: " + friendData[2].scores)
+                        // $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+                    );
+                    tableList.append(listItem);
+
+                } else if (friendscore5total >= friendscore4total) {
+                    var tableList = $("#tableList");
+
+                    // Then display the fields in the HTML (Section Name, Date, URL)
+                    var listItem = $("<li class='list-group-item mt-4'>");
+
+                    listItem.append(
+                        // $("<h2>").text("Table #" + (0)),
+                        $("<hr>"),
+                        $("<h2>").text("ID: " + friendData[3].friendName),
+                        $("<h2>").text("Name: " + friendData[3].photo),
+                        $("<h2>").text("Email: " + friendData[3].scores),
+                        // $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+                    );
+                    tableList.append(listItem);
+
+
+                }
+
+
+
+
+                // Here we then log the tableData to console, where it will show up as an object.
+                // console.log(friendData);
+                // console.log("------------------------------------");
+
+                // Loop through and display each of the customers
+                // for (var i = 0; i < tableData.length; i++) {
+
+                // Get a reference to the tableList element and populate it with tables
+                // var tableList = $("#tableList");
+
+                // Then display the fields in the HTML (Section Name, Date, URL)
+                // var listItem = $("<li class='list-group-item mt-4'>");
+
+                // listItem.append(
+                //     // $("<h2>").text("Table #" + (0)),
+                //     $("<hr>"),
+                //     $("<h2>").text("ID: " + friendData[0].friendName),
+                //     $("<h2>").text("Name: " + friendData[0].photo),
+                //     $("<h2>").text("Email: " + friendData[0].scores),
+                //     // $("<h2>").text("Phone: " + tableData[i].phoneNumber)
+                // );
+
+                // }
+            });
+    }
+    runTableQuery();
+</script>
+
+</html>
